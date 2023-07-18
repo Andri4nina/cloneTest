@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- style general tailwind  -->
+    <link rel="stylesheet" href="../public/css/dist/style.css">
+    <link rel="stylesheet" href="../public/css/style.css">
+
+    <!-- icone -->
+    <link rel="stylesheet" href="../public/css/font-awesome-4.7.0/css/all.min.css">
+    <link rel="stylesheet" href="../public/css/fontawesome-free-6.2.0-web/css/all.min.css">
+
+    <!-- sylte specifique  -->
+    <link rel="stylesheet" href="../public/css/user.css">
+    <link rel="stylesheet" href="../public/css/login.css">
+
+    <!-- style theme couleur -->
+    <link rel="stylesheet" href="../public/css/theme/bleu.css" class="alternate-style" title="bleu" enable>
+<!--     <link rel="stylesheet" href="../public/css/theme/emit.css" class="alternate-style" title="emit" enable> -->
+    <link rel="stylesheet" href="../public/css/theme/orange.css" class="alternate-style" title="orange" disabled>
+    <link rel="stylesheet" href="../public/css/theme/rose.css" class="alternate-style" title="rose" disabled>
+    <link rel="stylesheet" href="../public/css/theme/rouge.css" class="alternate-style" title="rouge" disabled>
+    <link rel="stylesheet" href="../public/css/theme/vert.css" class="alternate-style" title="vert" disabled>
+    <!-- javascript  -->
+   <!--  <script src="../public/js/applogin.js"></script> -->
+    <title>login</title>
+</head>
+<body class="relative w-screen h-screen logbody">    
+     
+
+    <div class="absolute top-5 left-3 ">
+        <a href="#" class="w-full top-0 left-10 inline mr-20 text-1xl logo">
+            <div class="flex">
+                <img src="../public/picture/Banniere-005.jpg" class="w-40"  alt="Banniere-005"><h1 class="font-extrabold pt-12 pl-2 ">  Ministere de l'Energie et de l'Hydrocarbure</h1>
+            </div> 
+        </a>
+    </div> 
+
+    <div class="absolute bottom-3 right-3 sm:top-3  sm:right-3 ">
+        <img src="../public/picture/Logo-MEH.png" class="w-28" alt="logo-MEH">
+    </div> 
+
+    
+    
+    <div
+        class="absolute w-full top-1/2 -translate-y-1/2 md:grid md:grid-cols-1 signin">
+        <form action="" method="" class="flex items-center justify-center flex-col  sign-in-form">
+            <h2 class="text-4xl mb-3 title">Se connecter</h2>
+            <div class="max-w-sm w-full h-14 my-3 mx-0 py-0 px-2 grid input_field">
+                <i class="text-center text-base pt-5 fa fa-user"></i>
+                <input type="text" placeholder="Nom d'utilisateur"
+                    class="bg-transparent outline-none border-none font-semibold text-lg" name="nomuser">
+            </div>
+            <div class=" border-4 max-w-sm w-full h-14 my-3 mx-0 py-0 px-2 grid input_field">
+                <i class="text-center text-base  pt-5 fa fa-lock"></i>
+                <input type="password" placeholder="Mot de passe"
+                    class="bg-transparent outline-none border-none font-semibold text-lg" name="mdpuser">
+            </div>
+            <button type="submit" value="login" name="connectbtn" class=" text-white rounded-xl p-3 mt-4  submit">
+                Se connecter
+            </button>
+        </form>
+    </div>
+
+
+
+
+ 
+</body>
+
+
+</html>

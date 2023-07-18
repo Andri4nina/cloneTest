@@ -1,0 +1,16 @@
+.logbody{
+    overflow: hidden;
+    background-color:var(--bg-black-50);
+}
+
+
+
+.loginform{
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -ms-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+}
+
+
+

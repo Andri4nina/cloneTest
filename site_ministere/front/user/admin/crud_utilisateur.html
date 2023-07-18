@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- style general tailwind  -->
+    <link rel="stylesheet" href="../../public/css/dist/style.css">
+    <link rel="stylesheet" href="../../public/css/style.css">
+
+    <!-- icone -->
+    <link rel="stylesheet" href="../../public/css/font-awesome-4.7.0/css/all.min.css">
+    <link rel="stylesheet" href="../../public/css/fontawesome-free-6.2.0-web/css/all.min.css">
+
+    <!-- sylte specifique  -->
+    <link rel="stylesheet" href="../../public/css/user.css">
+    <link rel="stylesheet" href="../../public/css/login.css">
+
+    <!-- style theme couleur -->
+    <link rel="stylesheet" href="../../public/css/theme/bleu.css" class="alternate-style" title="bleu" enable>
+<!--     <link rel="stylesheet" href="../../public/css/theme/emit.css" class="alternate-style" title="emit" enable> -->
+    <link rel="stylesheet" href="../../public/css/theme/orange.css" class="alternate-style" title="orange" disabled>
+    <link rel="stylesheet" href="../../public/css/theme/rose.css" class="alternate-style" title="rose" disabled>
+    <link rel="stylesheet" href="../../public/css/theme/rouge.css" class="alternate-style" title="rouge" disabled>
+    <link rel="stylesheet" href="../../public/css/theme/vert.css" class="alternate-style" title="vert" disabled>
+    <!-- javascript  -->
+   <!--  <script src="../../public/js/applogin.js"></script> -->
+    <title>Utilisateur</title>
+</head>
+<body>
+    <section class="user_style">
+        <!-- le titre ne bouge pas -->
+        <h2>
+            Utilisateur
+        </h2>
+    
+        <!-- style monopage -->
+        <!-- debut de la page -->
+        <div class="" id="CRUD_liste_user" >
+            <h5 class="pl-5 show_to_Top"><i class=" fa fa-chevron-right"></i>Liste des Utilisateur</h5>
+            <div class="show_to_Right w-full groupsearch">
+                <div class="mt-4 mr-3 flex gap-4 justify-end items-center">
+            
+                    <div class="text-center mt-5 mb-5">
+                        <label for="" class="relative searchstyle">
+                            <input class="pl-5" type="search" placeholder="..." class="search">
+                            <i class="absolute w-5 h-5 pt-0  fa fa-search"></i>
+                        </label>
+                    </div>
+                  
+                    <div class="block rounded-xl">
+                        <button class="p-2 text-white bg-green-500" id="btn_add_user" onclick="add_user()">
+                            Nouveau utilisateur <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div>
+                <!-- 
+                popups notification si user creer , erreur de connexion
+                liste de user 
+                cliquable renvoi vers creation/modifications de user
+                suppression avec popup de notification de suppression
+                -->
+                <div class="show_to_Center user_list">
+                    <div class="w-full">
+                       <table class="w-full">
+                            <thead>
+                                <tr class="text-left">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Nom d'utilisateur
+                                    </th>
+                                    <th>
+                                        Role
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr class="text-left">
+                                    <td data-title="ID">1</td>
+                                    <td data-title="Nom d'utilisateur">
+                                        Blitatous
+                                    </td>
+                                    <td data-title="Role">
+                                       Super-utilisateur
+                                    </td>
+                                   
+                                    <td data-title="Status">
+                                       en ligne
+                                    </td>
+                                    <td data-title="Action">
+                                        <div class=" publicaction">
+                                           
+                                                <button class="text-blue-600"><i class="fa fa-pen-square"></i></button>
+                                        
+                                                <button class="text-red-600" type="button"><i class=" fa fa-trash"></i></button>    
+                                        </div>
+                                    </td>
+                                </tr> 
+                            </tbody>
+                        </table> 
+                    </div>
+                   
+
+                    <div class="hidden w-full text-center pt-4" id="no_match">
+                        <span><i class="fa fa-xmark-circle"></i> aucun n'enregistrement ne correspond avec votre recherche </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <!-- page creation/modification -->
+        <div class="hidden" id="CRUD_creation_user" >
+            <h5 class="pl-5 show_to_Top"><i class=" fa fa-chevron-right"></i>Creation d'un nouveau utilisateur</h5>
+            <form action="">
+                <div class="sm:w-10/12 relative mx-auto">
+                    <h4 class="show_to_Top text-center font-semibold text-xl">Ajouter Nouvel utillisateur</h4>
+                    <div class="sm:w-10/12 mb-20 relative mx-auto new_user">
+                        <div class=" show_to_Left max-w-full w-full h-14 my-3 mx-0 py-0 px-2 grid input_field">
+                            <span class="text-base pt-5">Nom d'utilisateur</span>
+                            <input type="text" 
+                                class="bg-transparent outline-none border-none font-semibold text-lg" placeholder="...">
+                        </div>
+    
+                        <div class="show_to_Right max-w-full w-full h-14 my-3 mx-0 py-0 px-2 grid input_field">
+                            <span class="text-base  pt-5">Mots de passe</span>
+                            <input type="password" 
+                                class="bg-transparent outline-none border-none font-semibold text-lg" placeholder="...">
+                        </div>
+    
+                        <div class="show_to_Left max-w-full w-full h-20 my-3 mx-0 py-0 px-2 grid input_field">
+                            <span class="text-base  pt-5">Confirmer mot de passe</span>
+                            <input type="password" 
+                                class="bg-transparent outline-none border-none font-semibold text-lg" placeholder="...">
+                        </div>
+    
+    
+                       
+                        <div class="show_to_Center max-w-full w-full h-14 my-3 mx-0 py-0 px-2 grid ">
+                            <span class="text-base pt-5">Type d'utilisateur</span>
+                            <div class="flex gap-5">
+                              <input type="radio" id="admin" name="userType">
+                              <label class="pt-3" for="admin">Administrateur</label>
+                          
+                              <input type="radio" id="editeur" name="userType">
+                              <label class="pt-3" for="editeur">Editeur</label>
+                          
+                              <input type="radio" id="stagiaire" name="userType">
+                              <label class="pt-3" for="stagiaire">Stagiaire</label>
+                            </div>
+                        </div>
+                          
+                    </div>
+    
+                    <div class="show_to_Right relative privilege">
+                        <div class="absolute -top-8 left-4 all_privilege">
+                            <span class="-mt-5 font-medium">Privilege Global</span>
+                            <label for="all" class="mt-5 user_switch">
+                            <input type="checkbox" id="all">
+                            <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="mt-20 grid grid-cols-1 lg:grid-cols-3 gap-10 sm:mx-24">
+                            <div class="relative block py-10 mb-10 privilege_user">
+                                <div class="absolute -top-8 left-4 p-5 privilege_user_title">
+                                    <span>Super-utilisateur</span>
+                                    <label for="Su" class="mt-5 user_switch">
+                                        <input type="checkbox" id="Su">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex justify-end">
+                                    <div>
+                                        <span>Creation des Super-utilisateurs</span>
+                                    </div>
+                                    <div>
+                                          
+                                        <label for="CSu" class=" user_switch">
+                                            <input type="checkbox" id="CSu">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                  
+                                </div>
+                                <br>
+                                <div class="flex justify-end">
+                                    <div>
+                                        <span>Suppression Super-utilisateurs</span>
+                                    </div>
+                                    <div>
+                                        <label for="SSu" class="mt-5 user_switch">
+                                            <input type="checkbox" id="SSu">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                            <div class="relative py-10 mb-10 privilege_user">
+                                <div class="absolute -top-8 left-4 p-5 privilege_user_title"">
+                                    <span>Administration </span>
+                                    <label for="minad" class="mt-5 user_switch">
+                                        <input type="checkbox" id="minad">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div>
+                                        <span>Creation des utilisateurs </span>
+                                    </div>
+                                    <div>
+                                        <label for="Cuser" class="mt-10 user_switch">
+                                            <input type="checkbox" id="Cuser">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div>
+                                        <span>Suppression des utilisateur </span>
+                                    </div>
+                                    <div>
+                                        <label for="Suser" class="mt-5 user_switch">
+                                            <input type="checkbox" id="Suser">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>                              
+                                </div>
+                                <div class="flex justify-end">
+                                    <div>
+                                        <span>Repondre au visiteurs</span>
+                                    </div>
+                                    <div>
+                                        <label for="RVisit" class="mt-5 user_switch">
+                                            <input type="checkbox" id="RVisit">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>                               
+                                </div>
+                               <div class="flex justify-end">
+                                <div>
+                                    <span>Approbation des blogs</span>
+                                </div>
+                                <div>
+                                    <label for="AppB" class="mt-5 user_switch">
+                                        <input type="checkbox" id="AppB">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>                     
+                                </div>
+                               <div class="flex justify-end">
+                                    <div>
+                                        <span>Gestion des blog</span>
+                                    </div>
+                                    <div>
+                                        <label for="gestB" class="mt-5 user_switch">
+                                        <input type="checkbox" id="gestB">
+                                        <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relative w-full py-10 mb-10 privilege_user">
+                                <div class="absolute -top-8 left-4 p-5 privilege_user_title"">
+                                    <span>Donnees </span>
+                                    <label for="donne" class="mt-5 user_switch">
+                                        <input type="checkbox" id="donne">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div>
+                                        <span>Creation </span>
+                                    </div>
+                                    <div>
+
+                                    <label for="Creation" class="mt-5 user_switch">
+                                        <input type="checkbox" id="Creation">
+                                        <span class="slider"></span>
+                                    </label>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div>
+                                        <span>Suppression </span>
+                                    </div>
+                                    <div>
+
+                                    <label for="Suup" class="mt-5 user_switch">
+                                        <input type="checkbox" id="Suup">
+                                        <span class="slider"></span>
+                                    </label>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div>
+                                        <span>Modification</span>
+                                    </div>
+                                    <div>
+
+                                    <label for="modif" class="mt-5 user_switch">
+                                        <input type="checkbox" id="modif">
+                                        <span class="slider"></span>
+                                    </label>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+    
+    
+                    <div class="show_to_Right flex justify-center sm:justify-end gap-5 mt-7 mb-20">
+                        <button class="p-2 w-32 text-white bg-green-500" >Enregistrer</button>
+
+                        <button class="p-2 w-32 text-white bg-red-500" type="reset">Annuler</button>
+                    </div>
+                </div>
+            </form> 
+           
+
+        </div>
+
+           <!-- page creation/modification -->
+           <div class="hidden" id="CRUD_modification_user" >
+            <h5 class="pl-5 show_to_Top"><i class=" fa fa-chevron-right"></i>Modification de l'utilisateur</h5>
+            <form action="">
+                <div class="sm:w-10/12 relative mx-auto">
+                    <h4 class="show_to_Top text-center font-semibold text-xl">Modifier l'utillisateur</h4>
+                    <div class="sm:w-10/12 mb-20 relative mx-auto new_user">
+                        <div class=" show_to_Left max-w-full w-full h-14 my-3 mx-0 py-0 px-2 grid input_field">
+                            <span class="text-base pt-5">Nom d'utilisateur</span>
+                            <input type="text" 
+                                class="bg-transparent outline-none border-none font-semibold text-lg" placeholder="...">
+                        </div>
+    
+                        <div class="show_to_Right max-w-full w-full h-14 my-3 mx-0 py-0 px-2 grid input_field">
+                            <span class="text-base  pt-5">Mots de passe</span>
+                            <input type="password" 
+                                class="bg-transparent outline-none border-none font-semibold text-lg" placeholder="...">
+                        </div>
+    
+                        <div class="show_to_Left max-w-full w-full h-20 my-3 mx-0 py-0 px-2 grid input_field">
+                            <span class="text-base  pt-5">Confirmer mot de passe</span>
+                            <input type="password" 
+                                class="bg-transparent outline-none border-none font-semibold text-lg" placeholder="...">
+                        </div>
+      
+                        <div class="show_to_Center max-w-full w-full h-14 my-3 mx-0 py-0 px-2 grid ">
+                            <span class="text-base pt-5">Type d'utilisateur</span>
+                            <div class="flex gap-5">
+                              <input type="radio" id="admin" name="userType">
+                              <label class="pt-3" for="admin">Administrateur</label>
+                          
+                              <input type="radio" id="editeur" name="userType">
+                              <label class="pt-3" for="editeur">Editeur</label>
+                          
+                              <input type="radio" id="stagiaire" name="userType">
+                              <label class="pt-3" for="stagiaire">Stagiaire</label>
+                            </div>
+                        </div>
+        
+                    </div>  
+
+                    <div class="show_to_Right relative privilege">
+                        <div class="absolute -top-8 left-4 all_privilege">
+                            <span class="-mt-5 font-medium">Privilege Global</span>
+                            <label for="all" class="mt-5 user_switch">
+                            <input type="checkbox" id="all">
+                            <span class="slider"></span>
+                            </label>
+                        </div>                    
+                        <div class="mt-20 grid grid-cols-1 lg:grid-cols-3 gap-10 sm:mx-24">
+                            <div class="relative block py-10 mb-10 privilege_user">
+                                <div class="absolute -top-8 left-4 p-5 privilege_user_title">
+                                    <span>Super-utilisateur</span>
+                                    <label for="Su" class="mt-5 user_switch">
+                                        <input type="checkbox" id="Su">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>                             
+                                <div class="flex justify-end">
+                                    <div>
+                                        <span>Creation des Super-utilisateurs</span>
+                                    </div>
+                                    <div>
+                                          
+                                        <label for="CSu" class=" user_switch">
+                                            <input type="checkbox" id="CSu">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>                                
+                                </div>
+                                <br>
+                                <div class="flex justify-end">
+                                    <div>
+                                        <span>Suppression Super-utilisateurs</span>
+                                    </div>
+                                    <div>
+                                        <label for="SSu" class="mt-5 user_switch">
+                                            <input type="checkbox" id="SSu">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>                                
+                                </div>
+                            </div>
+                            <div class="relative py-10 mb-10 privilege_user">
+                                <div class="absolute -top-8 left-4 p-5 privilege_user_title"">
+                                    <span>Administration </span>
+                                    <label for="minad" class="mt-5 user_switch">
+                                        <input type="checkbox" id="minad">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div>
+                                        <span>Creation des utilisateurs </span>
+                                    </div>
+                                    <div>
+                                        <label for="Cuser" class="mt-10 user_switch">
+                                            <input type="checkbox" id="Cuser">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div>
+                                        <span>Suppression des utilisateur </span>
+                                    </div>
+                                    <div>
+                                        <label for="Suser" class="mt-5 user_switch">
+                                            <input type="checkbox" id="Suser">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>                              
+                                </div>
+                                <div class="flex justify-end">
+                                    <div>
+                                        <span>Repondre au visiteurs</span>
+                                    </div>
+                                    <div>
+                                        <label for="RVisit" class="mt-5 user_switch">
+                                            <input type="checkbox" id="RVisit">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>                               
+                                </div>
+                               <div class="flex justify-end">
+                                <div>
+                                    <span>Approbation des blogs</span>
+                                </div>
+                                <div>
+                                    <label for="AppB" class="mt-5 user_switch">
+                                        <input type="checkbox" id="AppB">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>                     
+                                </div>
+                               <div class="flex justify-end">
+                                    <div>
+                                        <span>Gestion des blog</span>
+                                    </div>
+                                    <div>
+                                        <label for="gestB" class="mt-5 user_switch">
+                                        <input type="checkbox" id="gestB">
+                                        <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relative w-full py-10 p-10 mb-10 privilege_user">
+                                <div class="absolute -top-8 left-4 p-5 privilege_user_title"">
+                                    <span>Donnees </span>
+                                    <label for="donne" class="mt-5 user_switch">
+                                        <input type="checkbox" id="donne">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div>
+                                        <span>Creation </span>
+                                    </div>
+                                    <div>
+                                    <label for="Creation" class="mt-5 user_switch">
+                                        <input type="checkbox" id="Creation">
+                                        <span class="slider"></span>
+                                    </label>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div>
+                                        <span>Suppression </span>
+                                    </div>
+                                    <div>
+                                    <label for="Suup" class="mt-5 user_switch">
+                                        <input type="checkbox" id="Suup">
+                                        <span class="slider"></span>
+                                    </label>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div>
+                                        <span>Modification</span>
+                                    </div>
+                                    <div>
+                                    <label for="modif" class="mt-5 user_switch">
+                                        <input type="checkbox" id="modif">
+                                        <span class="slider"></span>
+                                    </label>
+                                    </div>
+                                </div>
+                            </div>                     
+                        </div>
+                    </div>
+
+                    <div class="show_to_Right flex justify-center sm:justify-end gap-5 mt-7 mb-20">
+                        <button class="p-2 w-32 text-white bg-green-500" >Enregistrer</button>
+                        <button class="p-2 w-32 text-white bg-red-500" type="reset">Annuler</button>
+                    </div>
+
+                </div>
+            </form> 
+        </div>
+
+        <!-- profil de l'utilisateur-->
+        <div class="hidden" id="CRUD_profil_user">
+            <h5 class="pl-5 show_to_Top"><i class=" fa fa-chevron-right"></i>Profil</h5>
+        
+            <div class="block lg:flex gap-5">
+                <div class="w-auto">
+                    <div class="mx-5 mt-5 text-center user_profil_cards">
+                        <!--
+                            icone
+                            nom d'utilisateur role
+                            status 
+                            card nombre de publication creer
+                        -->
+                        <i class="text-6xl fa fa-user-circle"></i>
+                        <br>
+                        <br>
+                        <br>
+                        <span class="text-lg font-semibold">Blitatous (A.I)</span>
+                        <br>
+                        <br>
+                        <br>
+                        <span class="font-medium">Super Utilisateur</span>
+                        <br>
+                        <br>
+                        <span class="font-light">En ligne</span>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+
+                    <div class="mx-5 mt-5 text-center ">
+                        <h6 class="font-semibold">Taux de travail</h6>
+                        <div class="relative mx-auto mt-5 w-80 grid grid-cols-3 gap-1">
+                            <div>
+                                <span>Creation</span>
+                                <div class="circle">
+
+                                </div>
+                                <span>Globale</span>
+                                <canvas>
+                                    <!-- pourcentage de creation de blog par rapport au autre utilisateur -->
+                                </canvas>        
+                            </div>
+                            <div> 
+                                <span>publication</span>
+                                <div class="circle">
+
+                                </div>
+                                <span>Globale</span>
+                                <canvas>
+                                <!-- pourcentage de blog de publication par rapport au autre utilisateur -->
+                              </canvas>
+                            </div>
+                            <div> 
+                                <span>Creation</span>
+                                <div class="circle">
+
+                                </div>
+                                <span>Personnel</span>
+                                <canvas>
+                                    <!-- pourcentage de blog publier personnel par rapport a creer -->
+                                </canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- contenu du profil -->
+                <div class="w-full ">
+                    <div class="mt-10 sm:mt-5 ">
+                        <!-- liste des privilege -->
+                        <h6 class="font-semibold mb-10">Privilege accorder</h6>
+                        <div class="relative privilege">
+                            <div class="absolute -top-8 left-4 all_privilege">
+                                <span class="-mt-5 font-medium">Privilege Global</span>
+                                <label for="all" class="mt-5 user_switch">
+                                <input type="checkbox" id="all">
+                                <span class="slider"></span>
+                                </label>
+                            </div>
+                            
+                            <div class="mt-20 grid grid-cols-1 lg:grid-cols-3 gap-5 mx-1">
+                                <div class="relative block py-10 mb-10 privilege_user">
+                                    <div class="absolute -top-8 left-4 p-5 privilege_user_title">
+                                        <span>Super-utilisateur</span>
+                                        <label for="Su" class="mt-5 user_switch">
+                                            <input type="checkbox" id="Su">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="flex justify-end">
+                                        <div>
+                                            <span>Creation des Super-utilisateurs</span>
+                                        </div>
+                                        <div>
+                                              
+                                            <label for="CSu" class=" user_switch">
+                                                <input type="checkbox" id="CSu">
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                      
+                                    </div>
+                                    <br>
+                                    <div class="flex justify-end">
+                                        <div>
+                                            <span>Suppression Super-utilisateurs</span>
+                                        </div>
+                                        <div>
+                                            <label for="SSu" class="mt-5 user_switch">
+                                                <input type="checkbox" id="SSu">
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+                                <div class="relative py-10 mb-10 privilege_user">
+                                    <div class="absolute -top-8 left-4 p-5 privilege_user_title"">
+                                        <span>Administration </span>
+                                        <label for="minad" class="mt-5 user_switch">
+                                            <input type="checkbox" id="minad">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="flex justify-end">
+                                        <div>
+                                            <span>Creation des utilisateurs </span>
+                                        </div>
+                                        <div>
+                                            <label for="Cuser" class="mt-10 user_switch">
+                                                <input type="checkbox" id="Cuser">
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-end">
+                                        <div>
+                                            <span>Suppression des utilisateur </span>
+                                        </div>
+                                        <div>
+                                            <label for="Suser" class="mt-5 user_switch">
+                                                <input type="checkbox" id="Suser">
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>                              
+                                    </div>
+                                    <div class="flex justify-end">
+                                        <div>
+                                            <span>Repondre au visiteurs</span>
+                                        </div>
+                                        <div>
+                                            <label for="RVisit" class="mt-5 user_switch">
+                                                <input type="checkbox" id="RVisit">
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>                               
+                                    </div>
+                                   <div class="flex justify-end">
+                                    <div>
+                                        <span>Approbation des blogs</span>
+                                    </div>
+                                    <div>
+                                        <label for="AppB" class="mt-5 user_switch">
+                                            <input type="checkbox" id="AppB">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>                     
+                                    </div>
+                                   <div class="flex justify-end">
+                                        <div>
+                                            <span>Gestion des blog</span>
+                                        </div>
+                                        <div>
+                                            <label for="gestB" class="mt-5 user_switch">
+                                            <input type="checkbox" id="gestB">
+                                            <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="relative w-full py-10 p-10 mb-10 privilege_user">
+                                    <div class="absolute -top-8 left-4 p-5 privilege_user_title"">
+                                        <span>Donnees </span>
+                                        <label for="donne" class="mt-5 user_switch">
+                                            <input type="checkbox" id="donne">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="flex justify-end">
+                                        <div>
+                                            <span>Creation </span>
+                                        </div>
+                                        <div>
+    
+                                        <label for="Creation" class="mt-5 user_switch">
+                                            <input type="checkbox" id="Creation">
+                                            <span class="slider"></span>
+                                        </label>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-end">
+                                        <div>
+                                            <span>Suppression </span>
+                                        </div>
+                                        <div>
+    
+                                        <label for="Suup" class="mt-5 user_switch">
+                                            <input type="checkbox" id="Suup">
+                                            <span class="slider"></span>
+                                        </label>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-end">
+                                        <div>
+                                            <span>Modification</span>
+                                        </div>
+                                        <div>
+    
+                                        <label for="modif" class="mt-5 user_switch">
+                                            <input type="checkbox" id="modif">
+                                            <span class="slider"></span>
+                                        </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                        <!-- recherche -->
+                    <div class="mb-20">
+                        <h6 class="font-semibold pt-5">Liste de blog personnel</h6>
+                        <div class="mr-5 -mt-5 show_to_Right w-full groupsearch">
+                          
+                            <div class=" mr-3 flex gap-4 justify-end items-center">
+                        
+                                <div class="text-center mt-5 mb-5">
+                                    <label for="" class="relative searchstyle">
+                                        <input class="pl-5" type="search" placeholder="..." class="search">
+                                        <i class="absolute w-5 h-5 pt-0  fa fa-search"></i>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <!-- 
+                                liste de blog creer 
+                            -->
+                            <div class=" show_to_Center blog_list">
+                                <div class="w-full">
+                                   <table class="w-full">
+                                        <thead>
+                                            <tr class="text-left">
+                                                <th>
+                                                    ID
+                                                </th>
+                                                <th>
+                                                    Titre du Blog
+                                                </th>
+                                                <th>
+                                                    Date de creation 
+                                                </th>
+                                                <th>
+                                                    Date de derniere publication 
+                                                </th>
+                                                <th>
+                                                    Status
+                                                </th>
+                                                <th>
+                                                    Action
+                                                </th>
+                                                <th>
+                                                    Publier
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody >
+                                            <tr class="text-left">
+                                                <td data-title="ID">1</td>
+                                                <td data-title="Titre du Blog">
+                                                    <div>
+                                                        <a href="#contenu+title">Demande a la concurrence</a>
+                                                    </div>
+                                                </td>
+                                                <td data-title="Date de creation">
+                                                    12/12/2023
+                                                </td>
+                                                <td data-title="Date de derniere publication">
+                                                    12/12/2023
+                                                </td>
+                                                <td data-title="Status">
+                                                   publier
+                                                </td>
+                                                <td data-title="Action">
+                                                    <div class=" publicaction">
+                                                       
+                                                            <button class="text-blue-600"><i class="fa fa-pen-square"></i></button>
+                                                    
+                                                            <button class="text-red-600" type="button"><i class=" fa fa-trash"></i></button>
+                                                      
+                                                    </div>
+                                                </td>
+                                                <td data-title="Publier" class="publicswitch">
+                                                    <input type="checkbox" id="switch1" checked/><label for="switch1"></label>
+                                                </td>
+                                            </tr> 
+                                        </tbody>
+                                    </table> 
+                                </div>
+                               
+            
+                                <div class="hidden w-full text-center pt-4" id="no_match">
+                                    <span><i class="fa fa-xmark-circle"></i> aucun n'enregistrement ne correspond avec votre recherche </span>
+                                </div>
+            
+                         
+                             
+                            </div>
+                        </div>
+                    </div>
+                  
+
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- les notification cacher dans a page -->
+
+    <!--pop-up pour la confirmation de suppression de blog  -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-5  w-full sm:w-2/4  lg:w-1/4 text-center pop_ups hidden" id="delete_blog_confirmation ">
+        <span>Voulez-vous vraiment supprimer cette utlisateur ?</span>
+        
+        <form action="" class="mt-5">
+            <input type="hidden">
+            <div class="grid grid-cols-2 gap-2">
+                <button class="text-green-500">
+                    <i class="fa fa-check-circle"></i>Oui
+                </button>
+                <button class="text-red-500">
+                    <i class="fa fa-xmark-circle"></i>Non
+                </button>
+            </div>
+           
+        </form>
+    </div>
+
+    <!-- notification de creation -->
+    <div class="absolute -top-20 left-1/2 -translate-x-1/2 bg-green-500 p-5 w-full sm:w-2/4  lg:w-1/4 text-center" id="notifcreation">
+        <span class="text-white">Creation Effectuer</span>
+    </div> 
+    <!-- notification de existe deja -->
+    <div class="absolute -top-20 left-1/2 -translate-x-1/2 bg-orange-500 p-5  w-full sm:w-2/4  lg:w-1/4 text-center " id="notifcreationexiste">
+        <span class="text-white">cette utlisateur existe deja</span>
+    </div>
+    <!-- notification de modification -->
+    <div class="absolute -top-20 left-1/2 -translate-x-1/2 bg-blue-500 p-5  w-full sm:w-2/4  lg:w-1/4 text-center " id="notifmodification">
+        <span class="text-white">Modification Effectuer</span>
+    </div>
+    <!-- notification de suppression -->
+    <div class="absolute -top-20 left-1/2 -translate-x-1/2 bg-red-500 p-5  w-full sm:w-2/4  lg:w-1/4 text-center " id="notifsuppression">
+        <span class="text-white">Suppression Effectuer</span>
+    </div>
+ 
+
+</body>

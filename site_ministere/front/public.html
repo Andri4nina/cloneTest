@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- style general tailwind  -->
+    <link rel="stylesheet" href="public/css/dist/style.css">
+    <link rel="stylesheet" href="public/css/style.css">
+
+    <!-- icone -->
+    <link rel="stylesheet" href="public/css/font-awesome-4.7.0/css/all.min.css">
+    <link rel="stylesheet" href="public/css/fontawesome-free-6.2.0-web/css/all.min.css">
+
+    <!-- style specifique  -->
+    <link rel="stylesheet" href="public/css/public.css">
+
+    <!-- style theme couleur -->
+    <link rel="stylesheet" href="public/css/theme/bleu.css" class="alternate-style" title="bleu" enable>
+<!--     <link rel="stylesheet" href="public/css/theme/emit.css" class="alternate-style" title="emit" enable> -->
+    <link rel="stylesheet" href="public/css/theme/orange.css" class="alternate-style" title="orange" disabled>
+    <link rel="stylesheet" href="public/css/theme/rose.css" class="alternate-style" title="rose" disabled>
+    <link rel="stylesheet" href="public/css/theme/rouge.css" class="alternate-style" title="rouge" disabled>
+    <link rel="stylesheet" href="public/css/theme/vert.css" class="alternate-style" title="vert" disabled>
+
+
+
+
+    <title>public-page</title>
+</head>
+<body>
+<main>
+    <section id="acceuil">
+        <div class="flex flex-wrap">
+            <div class="w-1/4">
+            </div>
+    
+            <div class="w-1/2">
+                <div class="flex justify-center md:justify-start">
+                    <h2>ÊTRE AU COURANT DE NOS PROJETS</h2>
+                </div>
+            </div>
+    
+            <div class=" w-1/4">
+                <div class="flex justify-center md:justify-end">
+                    <div>
+                        «<div id="ministre_text"></div>» 
+                    </div>
+                </div>
+                
+                <script type="text/javascript">
+                    var i = 0;
+                    var text = "OFFRIR UNE ÉLECTRICITÉ MOINS CHÈRE ET AU MOINDRE COÛT À LA POPULATION";
+                    // fonction de taper les elements du text
+                    function typing() {
+                        if (i < text.length) {
+                            document.getElementById("ministre_text").innerHTML += text.charAt(i);
+                            i++;
+                            setTimeout(typing, 50);
+                        }
+                    }
+    
+                    typing();
+                </script>
+
+
+
+            </div>
+        </div>
+    </section>
+    
+</main>
+    
+
+
+
+
+
+
+</body>
+</html>

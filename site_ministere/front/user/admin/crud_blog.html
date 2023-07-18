@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- style general tailwind  -->
+    <link rel="stylesheet" href="../../public/css/dist/style.css">
+    <link rel="stylesheet" href="../../public/css/style.css">
+
+    <!-- icone -->
+    <link rel="stylesheet" href="../../public/css/font-awesome-4.7.0/css/all.min.css">
+    <link rel="stylesheet" href="../../public/css/fontawesome-free-6.2.0-web/css/all.min.css">
+
+    <!-- sylte specifique  -->
+    <link rel="stylesheet" href="../../public/css/user.css">
+
+    <!-- style theme couleur -->
+    <link rel="stylesheet" href="../../public/css/theme/bleu.css" class="alternate-style" title="bleu" enable>
+<!--     <link rel="stylesheet" href="../../public/css/theme/emit.css" class="alternate-style" title="emit" enable> -->
+    <link rel="stylesheet" href="../../public/css/theme/orange.css" class="alternate-style" title="orange" disabled>
+    <link rel="stylesheet" href="../../public/css/theme/rose.css" class="alternate-style" title="rose" disabled>
+    <link rel="stylesheet" href="../../public/css/theme/rouge.css" class="alternate-style" title="rouge" disabled>
+    <link rel="stylesheet" href="../../public/css/theme/vert.css" class="alternate-style" title="vert" disabled>
+    <!-- javascript  -->
+   <script src="../../public/js/app_blog.js" defer></script> 
+    <title>creation/modification</title>
+</head>
+<body>
+
+    <section class="blog_style">
+        <!-- le titre ne bouge pas -->
+        <h2 class="show_to_Top">
+            Blogs
+        </h2>
+        
+        <!-- style monopage -->
+        <!-- debut de la page -->
+        <div class="" id="CRUD_liste_blog" >
+            <h5 class="show_to_Top"><i class=" fa fa-chevron-right"></i> Liste des blogs</h5>
+            <div class="show_to_Right w-full groupsearch">
+                <div class="mt-4 mr-3 flex gap-4 justify-end items-center">
+            
+                    <div class="text-center mt-5 mb-5">
+                        <label for="" class="relative searchstyle">
+                            <input class="pl-5" type="search" placeholder="..." class="search">
+                            <i class="absolute w-5 h-5 pt-0  fa fa-search"></i>
+                        </label>
+                    </div>
+                  
+                    <div class="block rounded-xl">
+                        <button class="p-2 text-white bg-green-500" id="btn_add_blog" onclick="add_blog()">
+                            Nouveau blog <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div>
+                <!-- 
+                popups notification si blog creer , erreur de connexion
+                liste de blog 
+                cliquable renvoi vers creation/modifications de blog
+                suppression avec popup de notification de suppression
+                -->
+                <div class="show_to_Center blog_list">
+                    <div class="w-full">
+                       <table class="w-full">
+                            <thead>
+                                <tr class="text-left">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Titre du Blog
+                                    </th>
+                                    <th>
+                                        Date de creation 
+                                    </th>
+                                    <th>
+                                        Date de derniere publication 
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                    <th>
+                                        Publier
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr class="text-left">
+                                    <td data-title="ID">1</td>
+                                    <td data-title="Titre du Blog">
+                                        <div>
+                                            <a href="#contenu+title">Demande a la concurrence</a>
+                                        </div>
+                                    </td>
+                                    <td data-title="Date de creation">
+                                        12/12/2023
+                                    </td>
+                                    <td data-title="Date de derniere publication">
+                                        12/12/2023
+                                    </td>
+                                    <td data-title="Status">
+                                       publier
+                                    </td>
+                                    <td data-title="Action">
+                                        <div class=" publicaction">
+                                           
+                                                <button class="text-blue-600"><i class="fa fa-pen-square"></i></button>
+                                        
+                                                <button class="text-red-600" type="button"><i class=" fa fa-trash"></i></button>
+                                          
+                                        </div>
+                                    </td>
+                                    <td data-title="Publier" class="publicswitch">
+                                        <input type="checkbox" id="switch1" checked/><label for="switch1"></label>
+                                    </td>
+                                </tr> 
+                            </tbody>
+                        </table> 
+                    </div>
+                   
+
+                    <div class="hidden w-full text-center pt-4" id="no_match">
+                        <span><i class="fa fa-xmark-circle"></i> aucun n'enregistrement ne correspond avec votre recherche </span>
+                    </div>
+
+                    <div class="hidden w-full mt-4 relative gap-4 items-center" id="modif_checkbox">
+                        <button class="p-2 text-white absolute right-4 bg-green-500">
+                            Enregistrer
+                        </button>
+                    </div>
+                 
+                </div>
+            </div>
+        </div>
+
+
+        <!-- page creation -->
+        <div class="hidden" id="CRUD_creation_blog">
+            <i class="show_to_Left fixed top-14 sm:top-16 left-2 sm:left-5 lg:left-14 cursor-pointer text-3xl  fa fa-arrow-left" onclick="return_publi_blog()"></i>
+            <h5 class="show_to_Top"><i class="fa fa-chevron-right"></i> Creation de blog</h5>
+            <div class="w-11/12 m-auto pt-5">
+                <form action="" class="show_to_Center w-11/12 m-auto">
+                    <div class="grid sm:grid-cols-2 gap-2 ">
+                        <div class=" w-11/12 sm:pl-4 block mx-auto" >
+                            <h3 class=" font-semibold">Ajouter le contenu </h3>
+                            <div class=" max-w-full w-full h-14 my-3 mx-0 py-0 px-2 grid input_field">
+                                <span class="text-base  pt-5">Titre</span>
+                                <input type="text" 
+                                    class="bg-transparent outline-none border-none font-semibold text-lg" placeholder="...">
+                            </div>
+    
+                            <div class=" max-w-full w-full h-20 sm:h-14 my-3 mx-0 py-0 px-2 grid input_field">
+                                <span class="text-base  pt-5 ">Sous-Titre</span>
+                                <input type="text" 
+                                    class="bg-transparent outline-none border-none font-semibold text-lg"  placeholder="...">
+                            </div>
+                            <div class=" max-w-full w-full my-3 mx-0 py-0 px-2 relative grid input_field_libelle">
+                                <span class="text-base ">libelle</span>
+                                <textarea class=" bg-transparent outline-none border-none font-semibold text-lg" id="" cols="40" rows="50"></textarea>
+                            </div>
+                            <div class="pt-5">
+                                <span>Piece jointe</span>
+                                <input type="file"> 
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <h3 class="font-semibold">Ajouter une image de couverture</h3>
+                            <div class="w-full h-56 relative  btn_add_image">
+                                <i class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fa fa-add"></i>
+                            </div>
+                            <h3 class="mt-5 font-semibold">Ajouter une image/video</h3>
+                            <div class="flex grid-cols-2 gap-2 ">
+                                <div class="w-11/12 h-36 relative  btn_add_image">
+                                    <i class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fa fa-add"></i>
+                                </div>
+                                <div class="w-11/12 h-36 relative  btn_add_image">
+                                    <i class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fa fa-add"></i>
+                                </div>
+                                <div class="w-11/12 h-36 relative  btn_add_image">
+                                    <i class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fa fa-add"></i>
+                                </div>
+                            </div>
+                           
+                        </div>
+                        
+                    </div>
+                   
+
+                
+                    <div class="flex justify-center sm:justify-end gap-5 mt-7 mb-20">
+                        <button class="p-2 w-32 text-white bg-green-500" >Enregistrer</button>
+
+                        <button class="p-2 w-32 text-white bg-red-500" type="reset">Annuler</button>
+                    </div>
+                 
+
+                   
+                </form>
+             
+            </div>
+        </div>
+
+        <!-- page modification -->
+        <div class="hidden" id="CRUD_modification_blog">
+            <i class="show_to_Left fixed top-14 sm:top-16 left-2 sm:left-5 lg:left-14 cursor-pointer text-3xl  fa fa-arrow-left" onclick="return_publi_blog()"></i>
+            <h5 class="show_to_Top"><i class="fa fa-chevron-right"></i> Modification de blog</h5>
+            <div class="w-11/12 m-auto pt-5">
+                <form action="" class="show_to_Center w-11/12 m-auto">
+                    <div class="grid sm:grid-cols-2 gap-2 ">
+                        <div class=" w-11/12 sm:pl-4 block mx-auto" >
+                            <h3 class=" font-semibold">Modifier le contenu </h3>
+                            <div class=" max-w-full w-full h-14 my-3 mx-0 py-0 px-2 grid input_field">
+                                <span class="text-base  pt-5">Titre</span>
+                                <input type="text" 
+                                    class="bg-transparent outline-none border-none font-semibold text-lg" placeholder="...">
+                            </div>
+    
+                            <div class=" max-w-full w-full h-20 sm:h-14 my-3 mx-0 py-0 px-2 grid input_field">
+                                <span class="text-base  pt-5 ">Sous-Titre</span>
+                                <input type="text" 
+                                    class="bg-transparent outline-none border-none font-semibold text-lg"  placeholder="...">
+                            </div>
+                            <div class=" max-w-full w-full my-3 mx-0 py-0 px-2 relative grid input_field_libelle">
+                                <span class="text-base ">libelle</span>
+                                <textarea class=" bg-transparent outline-none border-none font-semibold text-lg" id="" cols="40" rows="50"></textarea>
+                            </div>
+                            <div class="pt-5">
+                                <span>Piece jointe</span>
+                                <input type="file"> 
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <h3 class="font-semibold">Modifier l'image de couverture</h3>
+                            <div class="w-full h-56 relative  btn_add_image">
+                                <i class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fa fa-add"></i>
+                            </div>
+                            <h3 class="mt-5 font-semibold">Modifier les images/videos</h3>
+                            <div class="flex grid-cols-2 gap-2 ">
+                                <div class="w-11/12 h-36 relative  btn_add_image">
+                                    <i class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fa fa-add"></i>
+                                </div>
+                                <div class="w-11/12 h-36 relative  btn_add_image">
+                                    <i class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fa fa-add"></i>
+                                </div>
+                                <div class="w-11/12 h-36 relative  btn_add_image">
+                                    <i class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fa fa-add"></i>
+                                </div>
+                            </div>
+                           
+                        </div>
+                        
+                    </div>
+                   
+
+                
+                    <div class="flex justify-center sm:justify-end gap-5 mt-7 mb-20">
+                        <button class="p-2 w-32 text-white bg-green-500" >Enregistrer</button>
+
+                        <button class="p-2 w-32 text-white bg-red-500" type="reset">Annuler</button>
+                    </div>
+                 
+
+                   
+                </form>
+             
+            </div>
+        </div>
+
+
+        <!-- page de confirmation de publication -->
+        <div class="hidden" id="CRUD_publication_blog">
+            <i class="show_to_Left fixed top-14 sm:top-16 left-2 sm:left-5 lg:left-14 cursor-pointer text-3xl  fa fa-arrow-left" onclick="return_publi_blog()"></i>
+            
+            <h5 class="show_to_Top"><i class="fa fa-chevron-right"></i> Verification et publication de blog</h5>
+            <div class="w-11/12 m-auto pt-5">
+                <form action="" class="show_to_Center w-11/12 m-auto">
+                    <div class="grid sm:grid-cols-2 gap-2 ">
+                        <div class=" w-11/12 sm:pl-4 block mx-auto" >
+                            <h3 class=" font-semibold"> Le contenu </h3>
+                            <div class=" max-w-full w-full h-14 my-3 mx-0 py-0 px-2 grid input_field">
+                                <span class="text-base  pt-5">Titre</span>
+                                <input type="text" 
+                                    class="bg-transparent outline-none border-none font-semibold text-lg" placeholder="...">
+                            </div>
+    
+                            <div class=" max-w-full w-full h-20 sm:h-14 my-3 mx-0 py-0 px-2 grid input_field">
+                                <span class="text-base  pt-5 ">Sous-Titre</span>
+                                <input type="text" 
+                                    class="bg-transparent outline-none border-none font-semibold text-lg"  placeholder="...">
+                            </div>
+                            <div class=" max-w-full w-full my-3 mx-0 py-0 px-2 relative grid input_field_libelle">
+                                <span class="text-base ">libelle</span>
+                                <textarea class=" bg-transparent outline-none border-none font-semibold text-lg" id="" cols="40" rows="50"></textarea>
+                            </div>
+                            <div class="pt-5">
+                                <span>Piece jointe</span>
+                                <input type="file"> 
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <h3 class="font-semibold"> L'image de couverture</h3>
+                            <div class="w-full h-56 relative  btn_add_image">
+                                <i class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fa fa-add"></i>
+                            </div>
+                            <h3 class="mt-5 font-semibold">Les images/videos</h3>
+                            <div class="flex grid-cols-2 gap-2 ">
+                                <div class="w-11/12 h-36 relative  btn_add_image">
+                                    <i class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fa fa-add"></i>
+                                </div>
+                                <div class="w-11/12 h-36 relative  btn_add_image">
+                                    <i class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fa fa-add"></i>
+                                </div>
+                                <div class="w-11/12 h-36 relative  btn_add_image">
+                                    <i class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fa fa-add"></i>
+                                </div>
+                            </div>
+                           
+                        </div>
+                        
+                    </div>
+                   
+
+                
+                    <div class="flex justify-center sm:justify-end gap-5 mt-7 mb-20">
+                        <button class="p-2 w-32 text-white bg-green-500" >Autoriser</button>
+
+                        <button class="p-2 w-32 text-white bg-red-500" type="reset">Annuler</button>
+                    </div>
+                 
+
+                   
+                </form>
+             
+            </div>
+        </div>
+
+        <!-- contenu  -->
+        <div class="hidden" id="CRUD_contenu_blog">
+            <h5 class="show_to_Top"><i class=" fa fa-chevron-right"></i> Affichage du contenue</h5>
+            <!-- 
+                supprimer 
+                renvoyer vers creation modification
+                bouton d'approbation et 
+                envoi la notification au createur
+                bouton publier
+            -->
+            <!-- blog-->
+            <div class="mt-8 ml-5 contenu_blog_style" >
+                <i class="show_to_Left fixed top-14 sm:top-16 left-2 sm:left-5 lg:left-14 cursor-pointer text-3xl  fa fa-arrow-left" onclick="return_contenu_blog()"></i>
+            
+                <h3 class="text-4xl font-semibold">Titre du blog</h3>
+
+                <h4  class="pt-5 text-xl font-medium">Sous titre du blog</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2">
+                    <div class="pt-14">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum corporis assumenda atque dolorem quibusdam,
+                            iusto maiores nobis. Distinctio unde iusto, quidem nam aut molestias necessitatibus facilis? 
+                            Ex veritatis quae voluptatibus?
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat assumenda, cupiditate id minima tempore soluta animi debitis eos libero non beatae officia laborum consequatur, 
+                            inventore fuga minus, asperiores dolore odio.
+                        </p>
+                    </div>
+                    <div class="mt-5" >
+                      
+                    <h4 class="text-base text-center font-medium">Photo de couverture</h4>
+                        <img class="pt-5 sm:h-full w-11/12 rounded-full" src="../../public/picture/upload/testupload/ciel-du-coucher-du-soleil-alimente-energie-eolienne-solaire-generee-par-ia.jpg" alt="">
+                    </div>
+                </div>
+              
+                <div class="mt-5 btn_piece_jointe">
+                    <button class="w-auto p-4 rounded-lg">nom du piece jointe <i class="fa fa-file-pdf"></i></button>
+                </div>
+             
+                <h4  class="text-xl text-center font-medium">Autre Media</h4>
+               
+                <div class="my-5 mx-8 grid grid-cols-4 gap-2 galerie_blog">
+                    <div class="cursor-pointer w-full">
+                        <img class="w-full h-full" src="../../public/picture/upload/testupload/11061300_18966207.jpeg" alt="mada">
+                    </div>
+                    <div class="cursor-pointer w-full">
+                        <img class="w-full h-full" src="../../public/picture/upload/testupload/7115763.jpg" alt="">
+                    </div>
+                    <div class="cursor-pointer  w-full">
+                        <img class="w-full h-full" src="../../public/picture/upload/testupload/8414048.jpg" alt="">
+                    </div>
+                    <div class="cursor-pointer w-full">
+                        <img class="w-full h-full" src="../../public/picture/upload/testupload/11061300_18966207.jpeg" alt="mada">
+                    </div>
+                    <div class="cursor-pointer w-full">
+                        <img class="w-full h-full" src="../../public/picture/upload/testupload/7115763.jpg" alt="">
+                    </div>
+                    <div class="cursor-pointer  w-full">
+                        <img class="w-full h-full" src="../../public/picture/upload/testupload/8414048.jpg" alt="">
+                    </div>
+                </div>
+
+                <div class="my-10 text-center">
+                    <button class="p-3 bg-green-500 text-white rounded-lg">Approuver</button>
+                    <button class="p-3 bg-blue-500 text-white rounded-lg">Modification</button>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- les notification cacher dans a page -->
+
+    <!--pop-up pour la confirmation de suppression de blog  -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-5  w-full sm:w-2/4  lg:w-1/4 text-center pop_ups hidden" id="delete_blog_confirmation ">
+        <span>Voulez-vous vraiment supprimer ce blog ?</span>
+        
+        <form action="" class="mt-5">
+            <input type="hidden">
+            <div class="grid grid-cols-2 gap-2">
+                <button class="text-green-500">
+                    <i class="fa fa-check-circle"></i>Oui
+                </button>
+                <button class="text-red-500">
+                    <i class="fa fa-xmark-circle"></i>Non
+                </button>
+            </div>
+           
+        </form>
+    </div>
+
+    <!-- notification de creation -->
+    <div class="absolute -top-20 left-1/2 -translate-x-1/2 bg-green-500 p-5 w-full sm:w-2/4  lg:w-1/4 text-center" id="notifcreation">
+        <span class="text-white">Creation Effectuer</span>
+    </div> 
+    <!-- notification de existe deja -->
+    <div class="absolute -top-20 left-1/2 -translate-x-1/2 bg-orange-500 p-5  w-full sm:w-2/4  lg:w-1/4 text-center " id="notifcreationexiste">
+        <span class="text-white">le titre existe deja</span>
+    </div>
+    <!-- notification de modification -->
+    <div class="absolute -top-20 left-1/2 -translate-x-1/2 bg-blue-500 p-5  w-full sm:w-2/4  lg:w-1/4 text-center " id="notifmodification">
+        <span class="text-white">Modification Effectuer</span>
+    </div>
+    <!-- notification de suppression -->
+    <div class="absolute -top-20 left-1/2 -translate-x-1/2 bg-red-500 p-5  w-full sm:w-2/4  lg:w-1/4 text-center " id="notifsuppression">
+        <span class="text-white">Suppression Effectuer</span>
+    </div>
+    <!--  notification de publication -->
+    <div class="absolute -top-20 left-1/2 -translate-x-1/2 bg-green-700 p-5  w-full sm:w-2/4  lg:w-1/4 text-center " id="notifpublication">
+        <span class="text-white">Publication Effectuer</span>
+    </div>
+
+
+</body>
+
+
+
+
+
+
+
+</html>

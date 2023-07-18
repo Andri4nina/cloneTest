@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- style general tailwind  -->
+    <link rel="stylesheet" href="../../public/css/dist/style.css">
+    <link rel="stylesheet" href="../../public/css/style.css">
+
+    <!-- icone -->
+    <link rel="stylesheet" href="../../public/css/font-awesome-4.7.0/css/all.min.css">
+    <link rel="stylesheet" href="../../public/css/fontawesome-free-6.2.0-web/css/all.min.css">
+
+    <!-- sylte specifique  -->
+    <link rel="stylesheet" href="../../public/css/user.css">
+    <link rel="stylesheet" href="../../public/css/login.css">
+
+    <!-- style theme couleur -->
+    <link rel="stylesheet" href="../../public/css/theme/bleu.css" class="alternate-style" title="bleu" enable>
+<!--     <link rel="stylesheet" href="../../public/css/theme/emit.css" class="alternate-style" title="emit" enable> -->
+    <link rel="stylesheet" href="../../public/css/theme/orange.css" class="alternate-style" title="orange" disabled>
+    <link rel="stylesheet" href="../../public/css/theme/rose.css" class="alternate-style" title="rose" disabled>
+    <link rel="stylesheet" href="../../public/css/theme/rouge.css" class="alternate-style" title="rouge" disabled>
+    <link rel="stylesheet" href="../../public/css/theme/vert.css" class="alternate-style" title="vert" disabled>
+    <!-- javascript  -->
+   <!--  <script src="../../public/js/applogin.js"></script> -->
+    <title>Tableau de bords</title>
+</head>
+<body>
+    <section class="min-h-screen w-screen">
+        <!-- le titre ne bouge pas -->
+        <h2>
+            Tableau de bord 
+        </h2>
+
+
+        <!--1ere partie diviser ecran en 2 -->
+        <div class="gap-4 dash_up">
+            <!-- 1ere division -->
+            <div class="show_to_Left h-auto block p-11  dash_user_utilite ">
+                <!-- prend tous le hauteur -->
+                <div class="relative text-center">
+                    <!-- nombre de visite du site en temps reel -->
+                    <span class="font-extrabold text-4xl">500000</span> 
+                    <i class="text-xs fa fa-users"></i>
+                    <p class="font-extralight">Nombres de visiteurs</p>
+                </div>
+                <div class="relative mt-5 block mx-auto w-44 dash_date_clock">
+                    <!-- date et heure -->  
+                    <div class="text-center h-auto  dash_date">
+                        <span class="text-4xl font-black" id="month"></span> <br>
+                        <span class="text-8xl" id="day"></span> <br>
+                        <span class="text-xl" id="week"></span><br>
+                        <span class="text-ellipsis" id="year"></span>
+                    </div>  
+
+                    <div class="absolute right-0 bottom-0 translate-x-1/2 translate-y-1/2 dash_clock">
+                        <div class="relative flex justify-center items-center w-16 h-16 clock">
+                        <div class="w-1 h-4 bg-white dash_hour" id="dash_hour"></div>
+                        <div class="w-1 h-5 bg-white  dash_minute" id="dash_minute"></div>
+                        <div class="w-1 h-6 bg-red-500 dash_second" id="dash_second"></div>
+                        <div class="absolute w-2 h-2 rounded-full bg-white dash_dot_center"></div>
+                        </div>
+                    </div>
+
+                    <script>
+                        const dash_second=document.getElementById('dash_second');
+                        const dash_minute=document.getElementById('dash_minute');
+                        const dash_hour=document.getElementById('dash_hour');
+                        function clock(){
+                            const date = new Date();
+                            const seconds=date.getSeconds() /60;
+                            const minutes=(seconds + date.getMinutes())/60;
+                            const hours=(minutes + date.getHours())/12;
+                            rotateClock(dash_second , seconds);
+                            rotateClock(dash_minute, minutes); 
+                            rotateClock(dash_hour  , hours);
+                        }
+                        function rotateClock(element,rotation){
+                            element.style.setProperty('--rotate',rotation* 360)
+                        }
+                        setInterval(clock ,1000);
+                        // date
+                        function updateDate() {
+                            var timeNow = new Date(),
+                                locale = 'fr-fr',
+                                day = addZero(timeNow.getDate()),
+                                month = timeNow.toLocaleString(locale, { month: 'short' }),
+                                year = timeNow.getFullYear(),
+                                weekDay = timeNow.toLocaleString(locale, { weekday: 'long' });
+                                document.getElementById('day').innerHTML = day;
+                                document.getElementById('month').innerHTML = month;
+                                document.getElementById('year').innerHTML = year;
+                                document.getElementById('week').innerHTML = weekDay;
+                            }
+                            function addZero(number) {
+                                return (number < 10 ? '0' : '') + number;
+                            }
+                            updateDate();
+                    </script>
+                </div>
+            </div>
+            
+            <!-- 2 eme division en 75% -->
+            <div class="show_to_Right w-full h-auto">
+                <!-- premiere division contients la listes des creations de blogs non publiers -->
+                <div class="overflow-y-hidden w-full h-32">
+                    <!-- affiche 2  et le reste on scroll -->
+                    <div class=" dash_list_publi_container">
+                        <h4 class="sticky top-0 left-0 font-semibold mt-5 ">Liste des publications en attende de d'approbation </h4>
+                        <!-- cliquable renvoi vers la listes des publications en attente de publication  -->
+                        <div class=" scrollable-list">
+                            <ul>
+                                <li>Publication 1</li>
+                                <li>Publication 2</li>
+                                <li>Publication 3</li>
+                                <li>Publication 3</li>
+                                <li>Publication 3</li>
+                                <li>Publication 3</li>
+                                <li>Publication 3</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 h-60 gap-7">
+                    <!-- divise en 4-5 colonne  -->
+                    <div class="relative counter"id="counter1">
+                        <!--compte le nombre de blog publier -->
+                        <!-- cliquable et renvoi vers la listes de blog avec filtre publier activer -->
+                        <h6 class="p-5 font-semibold">Blog Creer</h6>
+                        <div class="pt-3 text-center text-7xl">
+                            0
+                        </div>
+                    </div>
+                    <div class="relative counter" id="counter2">
+                        <!-- compte le nombre de blog Publier -->
+                        <h6 class="p-5 font-semibold">Blog Publier</h6>
+                      <div class="pt-3 text-center text-7xl">
+                            0
+                        </div>
+                    </div>
+                    <div class="relative counter" id="counter3">
+                        <!-- compte le nombre d'utilisateur -->
+                        <!-- cliquable et renvoi vers la listes des utilisateurs -->
+                        <h6 class="p-5 font-semibold">Nombre d'utilisateur</h6>
+                      <div class="pt-3 text-center text-7xl">
+                            0
+                        </div>
+                    </div>
+                    <div class="relative counter" id="counter4">
+                        <!-- compte les nombres de blog en attente de publication -->
+                        <!-- cliquable et renvoi vers la listes de blog avec filtre en attente activer -->
+                        <h6 class="p-5 font-semibold">Blog en attente</h6>
+                      <div class="pt-3 text-center text-7xl">
+                            0
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2eme partie -->
+        <div class="mb-5  gap-4 dash_down">
+            <!-- 25% largeur -->
+            <div class="mt-5 px-5 show_to_Left h-auto lg:w-1/5 overflow-hidden dash_user">
+                <h4 class="sticky top-0 left-0 font-semibold mt-5 ">Les Utilisateurs</h4>
+                    
+                <!--
+                    liste des utilisateurs avec leur nom statue et roles cliquable renvoi 
+                    vers profilesi clique vers messagerenvoi vers messagerie socket.io  
+                --> 
+                <div class="mt-5 w-full overflow-auto dash_user_List">
+                    <ul>
+                        <li class="px-4">
+                            <a href="#"class="w-full grid grid-cols-2">
+
+                            <span> User <br>
+                                <small>Role</small></span>
+
+                                <div class="user_log_status">
+                                    
+                                </div>
+                            </a>
+                        </li>
+                        <li class="px-4">
+                            <a href="#"class="w-full grid grid-cols-2">
+
+                            <span> User <br>
+                                <small>Role</small></span>
+
+                                <div class="user_log_status active">
+                                   
+                                </div>
+                            </a>
+                        </li>
+                        <li class="px-4">
+                            <a href="#"class="w-full grid grid-cols-2">
+
+                            <span> User <br>
+                                <small>Role</small></span>
+
+                                <div class="user_log_status">
+                                    
+                                </div>
+                            </a>
+                        </li>
+                        <li class="px-4">
+                            <a href="#"class="w-full grid grid-cols-2">
+
+                            <span> User <br>
+                                <small>Role</small></span>
+
+                                <div class="user_log_status active">
+                                   
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="show_to_Right mt-5 px-5  h-auto lg:w-4/5 dash_list_blog" >
+                <!-- 
+                    75% largeur tableau limiter des 5 dernieres blog 
+                    tous les listes renvoi vers la liste de blogs 
+                -->
+                <div class="show_to_Center blog_list">
+                            <h4 class="sticky top-0 left-0 font-semibold mt-5 ">Liste des publications</h4>
+
+                            <div class="w-full">
+
+                                <table class="w-full">
+                                        <thead>
+                                            <tr class="text-left">
+                                                <th>
+                                                    ID
+                                                </th>
+                                                <th>
+                                                    Titre du Blog
+                                                </th>
+                                                <th>
+                                                    Date de creation 
+                                                </th>
+                                                <th>
+                                                    Date de derniere publication 
+                                                </th>
+                                                <th>
+                                                    Status
+                                                </th>
+                                                <th>
+                                                    Action
+                                                </th>
+                                                <th>
+                                                    Publier
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody >
+                                            <tr class="text-left">
+                                                <td data-title="ID">1</td>
+                                                <td data-title="Titre du Blog">
+                                                    <div>
+                                                        <a href="#contenu+title">Demande a la concurrence</a>
+                                                    </div>
+                                                </td>
+                                                <td data-title="Date de creation">
+                                                    12/12/2023
+                                                </td>
+                                                <td data-title="Date de derniere publication">
+                                                    12/12/2023
+                                                </td>
+                                                <td data-title="Status">
+                                                publier
+                                                </td>
+                                                <td data-title="Action">
+                                                    <div class=" publicaction">
+                                                    
+                                                            <button class="text-blue-600"><i class="fa fa-pen-square"></i></button>
+                                                    
+                                                            <button class="text-red-600" type="button"><i class=" fa fa-trash"></i></button>
+                                                    
+                                                    </div>
+                                                </td>
+                                                <td data-title="Publier" class="publicswitch">
+                                                    <input type="checkbox" id="switch1" checked/><label for="switch1"></label>
+                                                </td>
+                                            </tr> 
+                                        </tbody>
+                                </table> 
+                            </div>
+                            <div class="text-center">
+                                <a class="text-center" href="#">voir plus</a>
+                            </div>
+                       
+                </div> 
+            </div>
+
+        </div>
+    </section>
+</body>
